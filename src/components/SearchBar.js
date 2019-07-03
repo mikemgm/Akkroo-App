@@ -2,14 +2,16 @@ import React, {Component} from "react";
 
 
 class SearchBar extends Component{
-    state = {tweet: ""}; 
+    state = {video: ""}; 
 
     onInputChange = (event) => {
-        this.setState({ tweet: event.target.value })
+        this.setState({ video: event.target.value })
     };
 
     onFormSubmit = (event) => {
         event.preventDefault();
+
+        this.props.onVideoSubmit(this.state.video);
     };
 
     render() {
@@ -19,10 +21,10 @@ class SearchBar extends Component{
                 className="ui form" 
                 onSubmit={this.onFormSubmit}>
                     <div className="field">
-                        <label>TWEET SEARCH</label>
+                        <label>YouTube Search</label>
                         <input 
                         type="text" 
-                        value={this.state.tweeet}
+                        value={this.state.video}
                         onChange= {this.onInputChange} />
                     </div>
                 </form>
