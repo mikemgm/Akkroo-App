@@ -21,7 +21,7 @@ class SearchBar extends Component{
                 className="ui form" 
                 onSubmit={this.onFormSubmit}>
                     <div className="field">
-                        <label>YouTube SEARCH</label>
+                        <label>YouTube Search</label>
                         <input 
                         type="text" 
                         value={this.state.video}

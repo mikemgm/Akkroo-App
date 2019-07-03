@@ -7,6 +7,12 @@ import VideoPlayer from "./VideoPlayer";
 
 class App extends Component {
     state = {videos: [], selectedVideo: null }
+
+
+    componentDidMount() {
+        this.onVideoSubmit("twitter");
+    };
+
     onVideoSubmit = async (video) => {
         const response = await youtube.get("/search", {
             params: {
@@ -14,22 +20,24 @@ class App extends Component {
             }
         });
 
-        this.setState({ videos: response.data.items })
+        this.setState({ 
+            videos: response.data.items,
+            selectedVideo: response.data.items[0]
+        })
     };
 
     onVideoSelect = (video) => {
-        console.log("this video", video);
-        // this.setState({ selectedVideo: video})
+        this.setState({ selectedVideo: video})
     }
 
     render() {
         return(
             <div className="ui container">
-            <SearchBar onVideoSubmit={this.onVideoSubmit} />
-            <VideosList 
-                onVideoSelect={this.onVideoSelect} 
-                videos={this.state.videos} />
-            <VideoPlayer video = {this.state.selectedVideo}/>
+                <SearchBar onVideoSubmit={this.onVideoSubmit} />
+                <VideoPlayer video = {this.state.selectedVideo}/>
+                <VideosList 
+                    onVideoSelect={this.onVideoSelect} 
+                    videos={this.state.videos} />
             </div>
         )
     }
